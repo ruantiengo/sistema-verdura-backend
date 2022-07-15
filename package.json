@@ -1,0 +1,8 @@
+{
+  "name": "sistema-verdura-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ruantiengo/sistema-verdura-backend.git",
+  "author": "Ruan Tiengo <ruantiengo@gmail.com>",
+  "license": "MIT"
+}
