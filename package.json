@@ -33,7 +33,7 @@
     "test": "jest --passWithNoTests  --no-cache --runInBand",
     "test:watch": "yarn test --watch",
     "test:staged": "yarn test --findRelatedTests",
-    "test:coverage": "yarn test -- --coverage"
+    "test:coverage": "yarn test --coverage"
   },
   "lint-staged": {
     "*.ts": ["yarn eslint --fix, yarn test:staged"]

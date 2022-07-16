@@ -3,13 +3,19 @@ import { HttpRequest, HttpResponse } from '../protocols/http'
 import { Login } from '../../types'
 import { badRequest } from '../helpers/status-code'
 import { MissingParamError } from '../error'
+import { Authentication } from '../../domain/usecases/authentication'
 
 export class LoginController implements Controller<Login.Params> {
-  handle (request: HttpRequest): Promise<HttpResponse> {
+  constructor (private readonly authentication: Authentication) {
+    this.authentication = authentication
+  }
+
+  async handle (request: HttpRequest): Promise<HttpResponse> {
     const requiredFields = ['email', 'password']
     for (const field of requiredFields) {
       if (request.body[field] === undefined) return new Promise((resolve, reject) => resolve(badRequest(new MissingParamError(field))))
     }
-    return new Promise(resolve => resolve({ statusCode: 200 }))
+    const accessToken = await this.authentication.auth(request.body)
+    return new Promise(resolve => resolve({ statusCode: 200, body: accessToken }))
   }
 }

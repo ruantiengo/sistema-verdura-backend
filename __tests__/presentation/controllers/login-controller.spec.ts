@@ -1,14 +1,16 @@
 import { LoginController } from '../../../src/presentation/controllers/login-controller'
 import { faker } from '@faker-js/faker'
 import { MissingParamError } from '../../../src/presentation/error'
+import { AuthenticationSpy } from '../mocks/authentication-mock'
 
 const makeSut = () => {
-  const sut = new LoginController()
+  const authentication = new AuthenticationSpy()
+  const sut = new LoginController(authentication)
   return { sut }
 }
 
 describe('Login Controller', () => {
-  test('should return 400 if no email is provided', async () => {
+  it('should return 400 if no email is provided', async () => {
     const { sut } = makeSut()
     const res = await sut.handle({
       body: {
@@ -19,7 +21,7 @@ describe('Login Controller', () => {
     expect(res.statusCode).toBe(400)
     expect(res.body).toEqual(new MissingParamError('email'))
   })
-  test('should return 400 if no password is provided', async () => {
+  it('should return 400 if no password is provided', async () => {
     const { sut } = makeSut()
     const res = await sut.handle({
       body: {
@@ -29,7 +31,7 @@ describe('Login Controller', () => {
     expect(res.statusCode).toBe(400)
     expect(res.body).toEqual(new MissingParamError('password'))
   })
-  test('should return 200 if no errors appers', async () => {
+  it('should return 200 if no errors appers', async () => {
     const { sut } = makeSut()
     const res = await sut.handle({
       body: {
@@ -38,5 +40,10 @@ describe('Login Controller', () => {
       }
     })
     expect(res.statusCode).toBe(200)
+    const result = {
+      accessToken: 'test'
+    }
+
+    expect(res.body).toEqual(result)
   })
 })
