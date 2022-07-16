@@ -1,11 +1,9 @@
 import { DbLoadAccountByEmail } from '../../../src/data/protocols/db-load-account-by-email'
 import { Account } from '../../../src/domain/entities/account'
-import { fakeAccount } from './fake-account'
+import { fakeAccount } from './fake-account-mock'
 
 export class DbLoadAccountByEmailSpy implements DbLoadAccountByEmail {
   load (email: string): Promise<Account> {
-    console.log(fakeAccount)
-
     return new Promise(resolve => resolve(fakeAccount))
   }
 }
