@@ -4,6 +4,8 @@ import { fakeAccount } from './fake-account'
 
 export class DbLoadAccountByEmailSpy implements DbLoadAccountByEmail {
   load (email: string): Promise<Account> {
+    console.log(fakeAccount)
+
     return new Promise(resolve => resolve(fakeAccount))
   }
 }
