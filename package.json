@@ -28,14 +28,17 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "test": "jest --passWithNoTests",
-    "test:watch": "jest --watch",
     "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest --passWithNoTests",
+    "test:watch": "yarn test --watch",
+    "test:staged": "tarn test --findRelatedTests",
+    "test:coverage": "yarn test -- --coverage"
   },
-  "lint-staged": {},
+  "lint-staged": {
+    "*.ts": ["yarn eslint --fix, yarn test"]
+  },
   "dependencies": {
-    "@prisma/client": "4.0.0",
-    "package.json": "^2.0.1"
+    "@prisma/client": "4.0.0"
   }
 }
