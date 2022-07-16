@@ -11,11 +11,16 @@ export class LoginController implements Controller<Login.Params> {
   }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
-    const requiredFields = ['email', 'password']
-    for (const field of requiredFields) {
-      if (request.body[field] === undefined) return new Promise((resolve, reject) => resolve(badRequest(new MissingParamError(field))))
+    try {
+      const requiredFields = ['email', 'password']
+      for (const field of requiredFields) {
+        if (request.body[field] === undefined) return new Promise((resolve, reject) => resolve(badRequest(new MissingParamError(field))))
+      }
+      const accessToken = await this.authentication.auth(request.body)
+      return new Promise(resolve => resolve({ statusCode: 200, body: accessToken }))
+    } catch (error) {
+      console.log('error')
+      return new Promise(resolve => resolve({ statusCode: 500 }))
     }
-    const accessToken = await this.authentication.auth(request.body)
-    return new Promise(resolve => resolve({ statusCode: 200, body: accessToken }))
   }
 }

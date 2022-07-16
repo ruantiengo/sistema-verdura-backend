@@ -16,4 +16,22 @@ describe('Remote authentication', () => {
     await sut.auth({ email, password: faker.internet.password() })
     expect(loadAccountSpy).toBeCalledWith(email)
   })
+  it('should throw if db load account throws', async () => {
+    const { sut, dbLoadAccountByEmail } = makeSut()
+    jest.spyOn(dbLoadAccountByEmail, 'load').mockImplementationOnce(() => {
+      return new Promise((resolve, reject) => reject(new Error()))
+    })
+    const email = faker.internet.email()
+    const promise = sut.auth({ email, password: faker.internet.password() })
+    expect(promise).rejects.toThrow()
+  })
+  it('should return null if no account is provided', async () => {
+    const { sut, dbLoadAccountByEmail } = makeSut()
+    jest.spyOn(dbLoadAccountByEmail, 'load').mockImplementationOnce(() => {
+      return new Promise((resolve) => resolve(null))
+    })
+    const email = faker.internet.email()
+    const res = await sut.auth({ email, password: faker.internet.password() })
+    expect(res).toBe(null)
+  })
 })

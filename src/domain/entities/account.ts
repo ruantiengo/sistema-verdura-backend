@@ -1,4 +1,4 @@
-export type Account = {
+export type Account = null | {
     id: string
     name: string
     email: string

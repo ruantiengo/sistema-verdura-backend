@@ -8,10 +8,11 @@ export class RemoteAuthentication implements Authentication {
   }
 
   async auth (authParams: Auth.Params): Promise<Auth.Result> {
-    const account = this.dbLoadAccountByEmail.load(authParams.email)
+    const account = await this.dbLoadAccountByEmail.load(authParams.email)
     if (account !== null) {
       console.log('123')
+      return new Promise(resolve => resolve({ accessToken: '1234' }))
     }
-    return new Promise(resolve => resolve({ accessToken: '1234' }))
+    return null
   }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1657980035552" clover="3.2.0">
-  <project timestamp="1657980035552" name="All files">
-    <metrics statements="82" coveredstatements="82" conditionals="16" coveredconditionals="16" methods="8" coveredmethods="8" elements="106" coveredelements="106" complexity="0" loc="82" ncloc="82" packages="6" files="8" classes="8"/>
+<coverage generated="1657982056350" clover="3.2.0">
+  <project timestamp="1657982056350" name="All files">
+    <metrics statements="88" coveredstatements="85" conditionals="20" coveredconditionals="19" methods="8" coveredmethods="8" elements="116" coveredelements="112" complexity="0" loc="88" ncloc="88" packages="6" files="8" classes="8"/>
     <package name="__tests__.data.mocks">
       <metrics statements="17" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="db-load-account-mock.ts" path="/Users/ruantiengo/Desktop/sistema-verdura-backend/__tests__/data/mocks/db-load-account-mock.ts">
@@ -12,8 +12,8 @@
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="7" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="8" count="1" type="stmt"/>
+        <line num="7" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="2" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
       </file>
       <file name="fake-account.ts" path="/Users/ruantiengo/Desktop/sistema-verdura-backend/__tests__/data/mocks/fake-account.ts">
@@ -47,32 +47,33 @@
       </file>
     </package>
     <package name="src.data.usecases">
-      <metrics statements="17" coveredstatements="17" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+      <metrics statements="18" coveredstatements="18" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
       <file name="remote-authentication.ts" path="/Users/ruantiengo/Desktop/sistema-verdura-backend/src/data/usecases/remote-authentication.ts">
-        <metrics statements="17" coveredstatements="17" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <metrics statements="18" coveredstatements="18" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="16" count="1" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.presentation.controllers">
-      <metrics statements="21" coveredstatements="21" conditionals="7" coveredconditionals="7" methods="2" coveredmethods="2"/>
+      <metrics statements="26" coveredstatements="23" conditionals="8" coveredconditionals="7" methods="2" coveredmethods="2"/>
       <file name="login-controller.ts" path="/Users/ruantiengo/Desktop/sistema-verdura-backend/src/presentation/controllers/login-controller.ts">
-        <metrics statements="21" coveredstatements="21" conditionals="7" coveredconditionals="7" methods="2" coveredmethods="2"/>
+        <metrics statements="26" coveredstatements="23" conditionals="8" coveredconditionals="7" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -87,13 +88,18 @@
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="14" count="3" type="stmt"/>
-        <line num="15" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="16" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="17" count="5" type="stmt"/>
-        <line num="18" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="5" type="stmt"/>
         <line num="19" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
+        <line num="20" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="21" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.presentation.error">

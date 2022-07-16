@@ -3,7 +3,7 @@ export namespace Auth{
         email: string
         password: string
     }
-    export type Result = {
+    export type Result = null | {
         accessToken: string
     }
 }
