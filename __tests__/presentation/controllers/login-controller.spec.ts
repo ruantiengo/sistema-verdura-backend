@@ -6,7 +6,7 @@ import { AuthenticationSpy } from '../mocks/authentication-mock'
 const makeSut = () => {
   const authentication = new AuthenticationSpy()
   const sut = new LoginController(authentication)
-  return { sut }
+  return { sut, authentication }
 }
 
 describe('Login Controller', () => {
@@ -45,5 +45,19 @@ describe('Login Controller', () => {
     }
 
     expect(res.body).toEqual(result)
+  })
+  it('should return 500 if authentication throws', async () => {
+    const { sut, authentication } = makeSut()
+    jest.spyOn(authentication, 'auth')
+      .mockImplementationOnce(() => {
+        return new Promise((resolve, reject) => reject(new Error()))
+      })
+    const res = await sut.handle({
+      body: {
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    expect(res.statusCode).toBe(500)
   })
 })
