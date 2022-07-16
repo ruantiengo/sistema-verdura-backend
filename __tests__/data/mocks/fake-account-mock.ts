@@ -4,5 +4,5 @@ export const fakeAccount: Account = {
   email: faker.internet.email(),
   id: faker.datatype.uuid(),
   name: faker.name.firstName(),
-  password: faker.internet.password()
+  password: faker.internet.password() // hashedpassword
 }

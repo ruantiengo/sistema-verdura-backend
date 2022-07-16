@@ -1,2 +1,5 @@
+coverage/lcov-report
+coverage/clover.xml
+coverage/coverage-final.json
+Icov.info
 node_modules
-coverage
