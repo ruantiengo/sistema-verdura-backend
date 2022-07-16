@@ -30,13 +30,13 @@
     "prepare": "husky install",
     "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
     "build": "tsc",
-    "test": "jest --passWithNoTests",
+    "test": "jest --passWithNoTests  --no-cache --runInBand",
     "test:watch": "yarn test --watch",
-    "test:staged": "tarn test --findRelatedTests",
+    "test:staged": "yarn test --findRelatedTests",
     "test:coverage": "yarn test -- --coverage"
   },
   "lint-staged": {
-    "*.ts": ["yarn eslint --fix, yarn test"]
+    "*.ts": ["yarn eslint --fix, yarn test:staged"]
   },
   "dependencies": {
     "@prisma/client": "4.0.0"

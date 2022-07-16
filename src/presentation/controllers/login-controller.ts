@@ -10,6 +10,6 @@ export class LoginController implements Controller<Login.Params> {
     for (const field of requiredFields) {
       if (request.body[field] === undefined) return new Promise((resolve, reject) => resolve(badRequest(new MissingParamError(field))))
     }
-    return new Promise(resolve => resolve({ statusCode: 500 }))
+    return new Promise(resolve => resolve({ statusCode: 200 }))
   }
 }

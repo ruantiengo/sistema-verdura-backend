@@ -29,4 +29,14 @@ describe('Login Controller', () => {
     expect(res.statusCode).toBe(400)
     expect(res.body).toEqual(new MissingParamError('password'))
   })
+  test('should return 200 if no errors appers', async () => {
+    const { sut } = makeSut()
+    const res = await sut.handle({
+      body: {
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    expect(res.statusCode).toBe(200)
+  })
 })
