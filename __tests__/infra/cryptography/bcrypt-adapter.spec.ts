@@ -36,4 +36,12 @@ describe('Bcrypt Adapter', () => {
     const res = await sut.compare(faker.internet.password(), faker.internet.password())
     expect(res).toBeTruthy()
   })
+  it('should throw if bcrypt throws', async () => {
+    const { sut } = makeSut()
+    jest.spyOn(bcrypt, 'compare').mockImplementationOnce(() => {
+      return new Promise((resolve, reject) => reject(new Error()))
+    })
+    const promise = sut.compare(faker.internet.password(), faker.internet.password())
+    expect(promise).rejects.toThrow()
+  })
 })

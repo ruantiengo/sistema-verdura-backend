@@ -1,3 +1,5 @@
+import { RefreshTokenModel } from '../domain/entities/refresh-token'
+
 export namespace Auth{
     export type Params = {
         email: string
@@ -5,5 +7,6 @@ export namespace Auth{
     }
     export type Result = null | {
         accessToken: string
+        refreshToken: RefreshTokenModel
     }
 }

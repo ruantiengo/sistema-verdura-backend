@@ -11,7 +11,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "RefreshToken" (
     "id" TEXT NOT NULL,
-    "expirenIn" INTEGER NOT NULL,
+    "expiresIn" INTEGER NOT NULL,
     "userId" TEXT NOT NULL,
 
     CONSTRAINT "RefreshToken_pkey" PRIMARY KEY ("id")

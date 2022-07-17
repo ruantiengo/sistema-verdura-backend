@@ -3,6 +3,7 @@ import { faker } from '@faker-js/faker'
 import { MissingParamError } from '../../../src/presentation/error'
 import { AuthenticationSpy } from '../mocks/authentication-mock'
 import { InvalidFieldError } from '../../../src/presentation/error/invalid-field-error'
+import { refreshTokenMock } from '../../data/mocks/refresh-token-mock'
 
 const makeSut = () => {
   const authentication = new AuthenticationSpy()
@@ -42,7 +43,8 @@ describe('Login Controller', () => {
     })
     expect(res.statusCode).toBe(200)
     const result = {
-      accessToken: 'test'
+      accessToken: 'test',
+      refreshToken: refreshTokenMock
     }
 
     expect(res.body).toEqual(result)
@@ -61,5 +63,19 @@ describe('Login Controller', () => {
     })
     expect(res.statusCode).toBe(400)
     expect(res.body).toEqual(new InvalidFieldError())
+  })
+  it('should return 500 if auth throws', async () => {
+    const { sut, authentication } = makeSut()
+    jest.spyOn(authentication, 'auth')
+      .mockImplementationOnce(() => {
+        return new Promise((resolve, reject) => reject(new Error()))
+      })
+    const res = await sut.handle({
+      body: {
+        email: faker.internet.email(),
+        password: faker.internet.password()
+      }
+    })
+    expect(res.statusCode).toBe(500)
   })
 })

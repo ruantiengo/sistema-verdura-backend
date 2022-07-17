@@ -1,7 +1,7 @@
-import { Encrypter } from '../../../src/data/protocols/encrypter'
+import { Encrypter } from '../../../src/data/protocols/cryptography/encrypter'
 
 export class EncrypterSpy implements Encrypter {
-  encrypt (argument: string): Promise<string> {
-    return new Promise(resolve => resolve('hashed-password'))
+  encrypt (argument: string, timeToExpire: number): string {
+    return 'hashed-password'
   }
 }
