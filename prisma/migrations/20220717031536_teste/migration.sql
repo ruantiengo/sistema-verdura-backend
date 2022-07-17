@@ -1,11 +1,20 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" UUID NOT NULL,
+    "id" TEXT NOT NULL,
     "name" VARCHAR(50) NOT NULL,
     "email" VARCHAR(50) NOT NULL,
     "password" TEXT NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "RefreshToken" (
+    "id" TEXT NOT NULL,
+    "expirenIn" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
+
+    CONSTRAINT "RefreshToken_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -64,6 +73,9 @@ CREATE TABLE "Employee" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "RefreshToken_userId_key" ON "RefreshToken"("userId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Address_clientId_key" ON "Address"("clientId");
 
 -- CreateIndex
@@ -71,6 +83,9 @@ CREATE UNIQUE INDEX "Address_providerId_key" ON "Address"("providerId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Address_employeeId_key" ON "Address"("employeeId");
+
+-- AddForeignKey
+ALTER TABLE "RefreshToken" ADD CONSTRAINT "RefreshToken_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Address" ADD CONSTRAINT "Address_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "Client"("id") ON DELETE SET NULL ON UPDATE CASCADE;

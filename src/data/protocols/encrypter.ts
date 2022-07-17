@@ -1,3 +1,3 @@
 export interface Encrypter{
-    encrypt(argument: string): Promise<string>
+    encrypt(argument: string, timeToExpire: number): Promise<string>
 }

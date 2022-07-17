@@ -2,6 +2,7 @@ import { LoginController } from '../../../src/presentation/controllers/login-con
 import { faker } from '@faker-js/faker'
 import { MissingParamError } from '../../../src/presentation/error'
 import { AuthenticationSpy } from '../mocks/authentication-mock'
+import { InvalidFieldError } from '../../../src/presentation/error/invalid-field-error'
 
 const makeSut = () => {
   const authentication = new AuthenticationSpy()
@@ -46,11 +47,11 @@ describe('Login Controller', () => {
 
     expect(res.body).toEqual(result)
   })
-  it('should return 500 if authentication throws', async () => {
+  it('should return 400 if some account field is invalid', async () => {
     const { sut, authentication } = makeSut()
     jest.spyOn(authentication, 'auth')
       .mockImplementationOnce(() => {
-        return new Promise((resolve, reject) => reject(new Error()))
+        return new Promise(resolve => resolve(null))
       })
     const res = await sut.handle({
       body: {
@@ -58,6 +59,7 @@ describe('Login Controller', () => {
         password: faker.internet.password()
       }
     })
-    expect(res.statusCode).toBe(500)
+    expect(res.statusCode).toBe(400)
+    expect(res.body).toEqual(new InvalidFieldError())
   })
 })

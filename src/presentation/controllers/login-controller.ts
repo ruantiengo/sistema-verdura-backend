@@ -4,6 +4,7 @@ import { Login } from '../../types'
 import { badRequest } from '../helpers/status-code'
 import { MissingParamError } from '../error'
 import { Authentication } from '../../domain/usecases/authentication'
+import { InvalidFieldError } from '../error/invalid-field-error'
 
 export class LoginController implements Controller<Login.Params> {
   constructor (private readonly authentication: Authentication) {
@@ -17,6 +18,7 @@ export class LoginController implements Controller<Login.Params> {
         if (request.body[field] === undefined) return badRequest(new MissingParamError(field))
       }
       const accessToken = await this.authentication.auth(request.body)
+      if (accessToken === null) return badRequest(new InvalidFieldError())
       return new Promise(resolve => resolve({ statusCode: 200, body: accessToken }))
     } catch (error) {
       return new Promise(resolve => resolve({ statusCode: 500 }))
