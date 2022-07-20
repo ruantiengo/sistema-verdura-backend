@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
-import prisma from '../../../src/infra/database/prisma-postgres/client'
 
-import { AccountPrisma } from '../../../src/infra/database/prisma-postgres/account-prisma'
+import { AccountPrisma } from '../../../../src/infra/database/prisma-postgres/account-prisma'
+import prisma from '../../../../src/infra/database/prisma-postgres/client'
 
 const sut = new AccountPrisma()
 

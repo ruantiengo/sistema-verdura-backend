@@ -20,8 +20,9 @@ export class RemoteAuthentication implements Authentication {
     const account = await this.dbLoadAccountByEmail.loadByEmail(authParams.email)
     if (account !== null) {
       const passwordMatch = await this.hashComparer.compare(account.password, authParams.password)
+      // const passwordMatch = true
       if (passwordMatch) {
-        const accessToken = this.encrypter.encrypt(account.id, 20)
+        const accessToken = this.encrypter.encrypt(account.id, 60 * 60 * 24)
         const refreshToken = await this.generateRefreshToken.generateRefreshToken(account.id)
         return new Promise(resolve => resolve({ accessToken, refreshToken }))
       } else return null

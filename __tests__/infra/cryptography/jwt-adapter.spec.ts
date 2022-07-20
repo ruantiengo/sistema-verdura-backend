@@ -10,11 +10,14 @@ const makeSut = () => {
 jest.mock('jsonwebtoken', () => ({
   sign (): string {
     return 'hashed-password'
+  },
+  verify (): string {
+    return 'password'
   }
 }))
 
 describe('Bcrypt Adapter', () => {
-  it('should call jwt with correct params', async () => {
+  it('should call sign with correct params', async () => {
     const { sut } = makeSut()
     const jwtSpy = jest.spyOn(jwt, 'sign')
     const id = faker.datatype.uuid()

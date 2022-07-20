@@ -86,6 +86,6 @@ describe('Remote authentication', () => {
     const email = faker.internet.email()
     await sut.auth({ email, password: faker.internet.password() })
 
-    expect(encryptSpy).toBeCalledWith(fakeAccount?.id, 20)
+    expect(encryptSpy).toBeCalledWith(fakeAccount?.id, 60 * 60 * 24)
   })
 })

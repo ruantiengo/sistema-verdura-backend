@@ -20,7 +20,6 @@ export class LoginController implements Controller<Login.Params> {
       const answer = await this.authentication.auth(request.body)
 
       if (answer === null || answer?.accessToken === null || answer?.refreshToken === null) return badRequest(new InvalidFieldError())
-      console.log(answer)
 
       return ok(answer)
     } catch (error) {

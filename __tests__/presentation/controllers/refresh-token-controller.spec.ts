@@ -1,4 +1,5 @@
 import { RefreshTokenController } from '../../../src/presentation/controllers/refresh-token-controller'
+import { fakeAccount } from '../../data/mocks'
 import { VerifyRefreshTokenSpy } from '../mocks/verify-refrech-token-mock'
 
 const makeSut = () => {
@@ -7,7 +8,7 @@ const makeSut = () => {
   return { sut, verifyRefreshToken }
 }
 
-describe('Login Controller', () => {
+describe('Refresh Token Controller', () => {
   it('should return 400 if no refresh token is provided', async () => {
     const { sut } = makeSut()
     const res = await sut.handle({
@@ -28,5 +29,15 @@ describe('Login Controller', () => {
       }
     })
     expect(res.statusCode).toBe(500)
+  })
+  it('should return 200 if verify token success', async () => {
+    const { sut } = makeSut()
+    const res = await sut.handle({
+      body: {
+        refreshToken: '123'
+      }
+    })
+    expect(res.statusCode).toBe(200)
+    expect(res.body).toEqual({ newAccessToken: fakeAccount?.id })
   })
 })

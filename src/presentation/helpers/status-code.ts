@@ -6,6 +6,12 @@ export const badRequest = (error: Error): HttpResponse => {
     body: error
   }
 }
+export const forbbiden = (error: Error): HttpResponse => {
+  return {
+    statusCode: 403,
+    body: error
+  }
+}
 
 export const ok = (body: any): HttpResponse => {
   return {
@@ -13,5 +19,12 @@ export const ok = (body: any): HttpResponse => {
     body: {
       ...body
     }
+  }
+}
+
+export const serverError = (): HttpResponse => {
+  return {
+    statusCode: 500
+
   }
 }

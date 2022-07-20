@@ -14,7 +14,7 @@ const makeSut = () => {
 describe('Verify Token', () => {
   it('should ensure if db load refresh token is called with correct param', async () => {
     const { sut, dbLoadRefreshToken } = makeSut()
-    const loadRefreshTokenSpy = jest.spyOn(dbLoadRefreshToken, 'load')
+    const loadRefreshTokenSpy = jest.spyOn(dbLoadRefreshToken, 'loadRefreshToken')
     const refreshToken: RefreshTokenModel = {
       expiresIn: 30,
       id: faker.datatype.uuid(),
@@ -25,7 +25,7 @@ describe('Verify Token', () => {
   })
   it('should throw if db load refresh token throws', async () => {
     const { sut, dbLoadRefreshToken } = makeSut()
-    jest.spyOn(dbLoadRefreshToken, 'load').mockImplementationOnce(() => {
+    jest.spyOn(dbLoadRefreshToken, 'loadRefreshToken').mockImplementationOnce(() => {
       return new Promise((resolve, reject) => reject(new Error()))
     })
     const refreshToken: RefreshTokenModel = {
@@ -38,7 +38,7 @@ describe('Verify Token', () => {
   })
   it('should return null if refresh token is invalid', async () => {
     const { sut, dbLoadRefreshToken } = makeSut()
-    jest.spyOn(dbLoadRefreshToken, 'load').mockImplementationOnce(() => {
+    jest.spyOn(dbLoadRefreshToken, 'loadRefreshToken').mockImplementationOnce(() => {
       return new Promise(resolve => resolve(null))
     })
     const refreshToken: RefreshTokenModel = {
@@ -58,6 +58,6 @@ describe('Verify Token', () => {
       userId: faker.datatype.uuid()
     }
     await sut.verify(refreshToken.id)
-    expect(encryptSpy).toBeCalledWith(fakeAccount?.id, 30)
+    expect(encryptSpy).toBeCalledWith(fakeAccount?.id, 60 * 60 * 24)
   })
 })

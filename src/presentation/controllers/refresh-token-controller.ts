@@ -16,7 +16,7 @@ export class RefreshTokenController implements Controller<RefreshTokenN.Params> 
       const refreshToken = request.body.refreshToken
       if (!refreshToken) return badRequest(new MissingParamError('refreshToken'))
       const newAccessToken = await this.verifyRefreshToken.verify(request.body.refreshToken)
-      return ok(newAccessToken)
+      return ok({ newAccessToken })
     } catch (error) {
       return { statusCode: 500 }
     }

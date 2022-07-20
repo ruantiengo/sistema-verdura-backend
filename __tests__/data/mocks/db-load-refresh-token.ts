@@ -4,7 +4,7 @@ import { RefreshTokenModel } from '../../../src/domain/entities/refresh-token'
 import { fakeAccount } from './fake-account-mock'
 
 export class LoadRefreshTokenSpy implements LoadRefreshToken {
-  load (refreshToken: string): Promise<RefreshTokenModel> {
+  loadRefreshToken (refreshToken: string): Promise<RefreshTokenModel> {
     return new Promise(resolve => resolve({
       expiresIn: 30,
       id: faker.datatype.uuid(),

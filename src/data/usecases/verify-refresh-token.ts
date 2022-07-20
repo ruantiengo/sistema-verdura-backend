@@ -10,9 +10,12 @@ export class DbVerifyRefreshToken implements VerifyRefreshToken {
   }
 
   async verify (refreshToken: string): Promise<string | null> {
-    const getRefreshToken = await this.loadRefreshToken.load(refreshToken)
+    const getRefreshToken = await this.loadRefreshToken.loadRefreshToken(refreshToken)
+
     if (getRefreshToken === null) return null
-    const accessToken = this.generateRefreshToken.encrypt(getRefreshToken.userId, 30)
+
+    const accessToken = this.generateRefreshToken.encrypt(getRefreshToken.userId, 60 * 60 * 24)
+
     return accessToken
   }
 }
