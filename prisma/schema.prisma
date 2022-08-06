@@ -27,15 +27,15 @@ model RefreshToken{
 
 
 
-model Client {
+model Costumer {
   id        Int      @id @default(autoincrement())
-  name      String  @db.VarChar(50)
-  phone     String @db.VarChar(50)
-  type      String @db.VarChar(50) // fisico ou juridico
-  cpf_cnpj  String @db.VarChar(50)
-  birthday  String? @db.VarChar(50)
+  name      String  @db.VarChar(50) @unique
+  phone     String? @db.VarChar(50)
+  type      String? @db.VarChar(50) // fisico ou juridico
+  cpf_cnpj  String? @db.VarChar(50)
   address   Address?  
-  note      String @db.VarChar(255)
+  note      String? @db.VarChar(255)
+	
 }
 
 model Address {
@@ -44,7 +44,7 @@ model Address {
   district  String @db.VarChar(50)
   city      String @db.VarChar(50)
   state     String @db.VarChar(50)
-  client    Client? @relation(fields: [clientId], references: [id])
+  client    Costumer? @relation(fields: [clientId], references: [id])
   clientId  Int? @unique
   provider  Provider? @relation(fields: [providerId], references: [id])
   providerId Int? @unique

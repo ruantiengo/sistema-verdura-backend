@@ -1,7 +1,7 @@
 import { DbVerifyRefreshToken } from '../../../data/usecases/verify-refresh-token'
 import { JwtAdapter } from '../../../infra/cryptography/jwt-adapter'
 import { AccountPrisma } from '../../../infra/database/prisma-postgres/account-prisma'
-import { RefreshTokenController } from '../../../presentation/controllers/refresh-token-controller'
+import { RefreshTokenController } from '../../../presentation/controllers/login/refresh-token-controller'
 
 export const refreshTokenControllerFactory = () => {
   const loadToken = new AccountPrisma()

@@ -1,4 +1,3 @@
-import { Account } from '../../domain/entities/account'
 import { AddAccount } from '../../domain/usecases/add-account'
 import { SignUp } from '../../types/sign-up'
 import { Hasher } from '../protocols/cryptography/hasher'
@@ -10,14 +9,14 @@ export class DbAddAccount implements AddAccount {
     this.hasher = hasher
   }
 
-  async add (addAccountParams:Omit<SignUp.Params, 'passwordConfirmation'>): Promise<Account> {
+  async add (addAccountParams:Omit<SignUp.Params, 'passwordConfirmation'>): Promise<boolean> {
     const hashedPassword = await this.hasher.hash(addAccountParams.password)
     const addAccount = {
       name: addAccountParams.name,
       email: addAccountParams.email,
       password: hashedPassword
     }
-    const account = await this.addAccountRepo.add(addAccount)
-    return account
+    const isValid = await this.addAccountRepo.add(addAccount)
+    return isValid
   }
 }

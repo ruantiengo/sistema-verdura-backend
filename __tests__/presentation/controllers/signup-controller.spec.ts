@@ -1,5 +1,6 @@
-import { SignUpController } from '../../../src/presentation/controllers/signup-controller'
+import { SignUpController } from '../../../src/presentation/controllers/login/signup-controller'
 import { MissingParamError } from '../../../src/presentation/error'
+import { EmailAlreadyInUse } from '../../../src/presentation/error/email-already-in-use-error'
 import { PasswordConfirmationError } from '../../../src/presentation/error/PasswordsDifferentsError'
 import { AddAccountSpy } from '../mocks/add-account-mock'
 import { fakeAddAccount } from '../mocks/fake-add-account'
@@ -106,6 +107,23 @@ describe('SignUpController', () => {
     const res = await sut.handle({ body: account })
 
     expect(res.statusCode).toBe(500)
+  })
+  it('should return 400 if email already in use', async () => {
+    const { sut, addAccount } = makeSut()
+    jest.spyOn(addAccount, 'add').mockImplementationOnce(() => {
+      return new Promise((resolve) => resolve(false))
+    })
+    const account = {
+      name: fakeAddAccount.name,
+      password: fakeAddAccount.password,
+      passwordConfirmation: fakeAddAccount.password,
+      email: fakeAddAccount.email
+    }
+
+    const res = await sut.handle({ body: account })
+
+    expect(res.statusCode).toBe(400)
+    expect(res.body).toEqual(new EmailAlreadyInUse())
   })
   it('should return 200', async () => {
     const { sut } = makeSut()
