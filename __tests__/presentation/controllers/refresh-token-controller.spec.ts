@@ -1,4 +1,4 @@
-import { RefreshTokenController } from '../../../src/presentation/controllers/refresh-token-controller'
+import { RefreshTokenController } from '../../../src/presentation/controllers/login/refresh-token-controller'
 import { fakeAccount } from '../../data/mocks'
 import { VerifyRefreshTokenSpy } from '../mocks/verify-refrech-token-mock'
 

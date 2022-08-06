@@ -1,4 +1,4 @@
-import { LoginController } from '../../../src/presentation/controllers/login-controller'
+import { LoginController } from '../../../src/presentation/controllers/login/login-controller'
 import { faker } from '@faker-js/faker'
 import { MissingParamError } from '../../../src/presentation/error'
 import { AuthenticationSpy } from '../mocks/authentication-mock'

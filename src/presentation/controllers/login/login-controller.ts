@@ -1,10 +1,10 @@
-import { Controller } from '../protocols/controller'
-import { HttpRequest, HttpResponse } from '../protocols/http'
-import { Login } from '../../types'
-import { badRequest, ok } from '../helpers/status-code'
-import { MissingParamError } from '../error'
-import { Authentication } from '../../domain/usecases/authentication'
-import { InvalidFieldError } from '../error/invalid-field-error'
+import { Controller } from '../../protocols/controller'
+import { HttpRequest, HttpResponse } from '../../protocols/http'
+import { Login } from '../../../types'
+import { badRequest, ok } from '../../helpers/status-code'
+import { MissingParamError } from '../../error'
+import { Authentication } from '../../../domain/usecases/authentication'
+import { InvalidFieldError } from '../../error/invalid-field-error'
 
 export class LoginController implements Controller<Login.Params> {
   constructor (private readonly authentication: Authentication) {
