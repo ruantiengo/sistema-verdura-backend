@@ -49,7 +49,7 @@ describe('Login Controller', () => {
 
     expect(res.body).toEqual(result)
   })
-  it('should return 400 if some account field is invalid', async () => {
+  it('should return 401 if some account field is invalid', async () => {
     const { sut, authentication } = makeSut()
     jest.spyOn(authentication, 'auth')
       .mockImplementationOnce(() => {
@@ -61,7 +61,7 @@ describe('Login Controller', () => {
         password: faker.internet.password()
       }
     })
-    expect(res.statusCode).toBe(400)
+    expect(res.statusCode).toBe(401)
     expect(res.body).toEqual(new InvalidFieldError())
   })
   it('should return 500 if auth throws', async () => {

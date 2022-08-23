@@ -1,7 +1,7 @@
 import { Controller } from '../../protocols/controller'
 import { HttpRequest, HttpResponse } from '../../protocols/http'
 import { Login } from '../../../types'
-import { badRequest, ok } from '../../helpers/status-code'
+import { badRequest, ok, unauthorized } from '../../helpers/status-code'
 import { MissingParamError } from '../../error'
 import { Authentication } from '../../../domain/usecases/authentication'
 import { InvalidFieldError } from '../../error/invalid-field-error'
@@ -19,7 +19,7 @@ export class LoginController implements Controller<Login.Params> {
       }
       const answer = await this.authentication.auth(request.body)
 
-      if (answer === null || answer?.accessToken === null || answer?.refreshToken === null) return badRequest(new InvalidFieldError())
+      if (answer === null || answer?.accessToken === null || answer?.refreshToken === null) return unauthorized(new InvalidFieldError())
 
       return ok(answer)
     } catch (error) {

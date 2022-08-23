@@ -43,9 +43,9 @@ describe('Add Account Use Case', () => {
     const promise = sut.add({ email: fakeAccount!.email, password: fakeAccount!.password, name: fakeAccount!.name })
     expect(promise).rejects.toThrow()
   })
-  it('should return an hashed when use case success', async () => {
+  it('should return an hashed text when use case success', async () => {
     const { sut } = makeSut()
     const res = await sut.add({ email: fakeAccount!.email, password: fakeAccount!.password, name: fakeAccount!.name })
-    expect(res).toEqual(fakeAccount)
+    expect(res).toBe(true)
   })
 })
